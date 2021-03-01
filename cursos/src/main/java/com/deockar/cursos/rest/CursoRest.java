@@ -1,45 +1,42 @@
-package com.deockar.backend.rest;
+package com.deockar.cursos.rest;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deockar.backend.dao.PessoaDao;
-import com.deockar.backend.entidade.Pessoa;
-
-import java.util.List;
+import com.deockar.cursos.dao.CursoDao;
+import com.deockar.cursos.entidade.Curso;
 
 @RestController
-@RequestMapping("/pessoa")
-public class PessoaRest {
+@RequestMapping("/curso")
+public class CursoRest {
 
 	@Autowired
-	private PessoaDao pessoaDao;
-
+	private CursoDao cursoDao;
+	
+	
 	@GetMapping
-	public List<Pessoa> get() {
-		return pessoaDao.findAll();
+	public List<Curso> get(){
+		return cursoDao.findAll();
 	}
-
+	
 	@PostMapping
-	public void post(@RequestBody Pessoa pessoa) {
-		pessoaDao.save(pessoa);
-	}
-
-	@PutMapping
-	public void put(@RequestBody Pessoa pessoa) {
-		pessoaDao.save(pessoa);
+	public void post(@RequestBody Curso curso) {
+		cursoDao.save(curso);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") Long id) {
-		pessoaDao.deleteById(id);
+	private void delete (@PathVariable("id") Long id) {
+		cursoDao.deleteById(id);
+
 	}
+	
 	
 }
